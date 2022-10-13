@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "fe2e305b-6aec-4645-ac31-e2bf238856c6",
+		"name": "ProductManagement",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "AddProduct",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"productName\": \"Sample\",\r\n    \"shortDescription\": \"Sample Product\",\r\n    \"detailedDescription\": \"Sample Product\",\r\n    \"category\": \"Sculptor\",\r\n    \"startingPrice\": 100,\r\n    \"bidEndDate\": \"2023-02-03\",\r\n    \"sellerId\": 101\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/e-auction/api/v1/seller/add-product",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e-auction",
+						"api",
+						"v1",
+						"seller",
+						"add-product"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "DeleteProduct",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/e-auction/api/v1/seller/delete/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e-auction",
+						"api",
+						"v1",
+						"seller",
+						"delete",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Product",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8081/e-auction/api/v1/seller/show-bids/3",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e-auction",
+						"api",
+						"v1",
+						"seller",
+						"show-bids",
+						"3"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Register",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"admin\",\r\n    \"password\": \"admin\",\r\n    \"firstName\": \"Admin\",\r\n    \"lastName\": \"Admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/login/register",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"login",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Authenticate",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"userId\": \"admin\",\r\n    \"password\": \"admin\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/login/authenticate",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"login",
+						"authenticate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "place-bid",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2NTQ4MzI5MywiaWF0IjoxNjY1NDY1MjkzfQ.-h18wH3MHH9dDfLi1kVyPiWkZMaVTfGeMfUGHv_iXZhup7gxCR21gCAW1If_I3tuMap3Wss7n1GlpP6eoLb7dg",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\t\r\n\t\"firstName\": \"XYZ Buyer\",\r\n\t\"lastName\": \"XYZ Buyer\",\r\n\t\"address\": \"No-10 2nd Street\",\r\n\t\"city\": \"Chennai\",\r\n\t\"state\": \"Tamil Nadu\",\r\n\t\"pin\": \"600118\",\r\n\t\"phone\": \"9994877571\",\r\n\t\"email\": \"a@b.com\",\r\n\t\"productId\": 4,\r\n\t\"bidAmount\": 102,\r\n    \"sellerId\":101\r\n}\r\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/e-auction/api/v1/buyer/place-bid",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e-auction",
+						"api",
+						"v1",
+						"buyer",
+						"place-bid"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update new Bid Amount",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2NTUyNzk3MCwiaWF0IjoxNjY1NTA5OTcwfQ.-rxui22as0geXnGRGDLcRq5OQk4gurRhDdHgMG2TwuZWI5XLOrFqRdEhI5BtQhJXSh941UgTkZrhUkdqszPWbQ",
+						"type": "default"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:8081/e-auction/api/v1/buyer/update-bid/4/a@b.com/200",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e-auction",
+						"api",
+						"v1",
+						"buyer",
+						"update-bid",
+						"4",
+						"a@b.com",
+						"200"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auditDetails",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbiIsImV4cCI6MTY2NTY3MTUyNCwiaWF0IjoxNjY1NjUzNTI0fQ.05ogAkJaWAQT-T1kX0H-_hK5bkucgaU7rQhaxHtCPTzORFxrmSGvgz1hAAo9hqYkLwBguivYNoFglSiCXjpCqQ",
+						"type": "default"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n\"id\":2,\r\n\"action\":\"Product Saved\",\r\n\"AuditMessage\":\"Product Saved\",\r\n\"auctionEntity\":\"Product\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8081/e-auction/api/v1/auditDetails",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8081",
+					"path": [
+						"e-auction",
+						"api",
+						"v1",
+						"auditDetails"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

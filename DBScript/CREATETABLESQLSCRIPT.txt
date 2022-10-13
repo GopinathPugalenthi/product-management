@@ -1,0 +1,57 @@
+
+CREATE TABLE SELLERINFO(
+	seller_id INT(11) AUTO_INCREMENT,
+	first_name VARCHAR(30) NOT NULL,
+	last_name VARCHAR(25) NOT NULL,
+	address VARCHAR(255),
+	city VARCHAR(30),
+	state VARCHAR(30),
+	pin VARCHAR(10),
+	phone VARCHAR(10) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	CONSTRAINT SELLERINFO_PK PRIMARY KEY (seller_id) 
+);
+
+
+CREATE TABLE PRODUCT (
+	product_id INT(11) AUTO_INCREMENT,
+	seller_id INT(11) NOT NULL,
+	product_name VARCHAR(30) NOT NULL,
+    short_description VARCHAR(255),
+    detailed_description VARCHAR(255),
+    category VARCHAR(10),
+    starting_price INT,
+    bid_end_date date,
+	CONSTRAINT PRODUCT_PK PRIMARY KEY (product_id),
+	CONSTRAINT PRODUCT_SELLERINFO_FK FOREIGN KEY (seller_id) REFERENCES SELLERINFO(seller_id)
+);
+
+
+
+CREATE TABLE BYERINFO (
+	buyer_id INT(11) AUTO_INCREMENT,
+	first_name VARCHAR(30) NOT NULL,
+	last_name VARCHAR(25) NOT NULL,
+	address VARCHAR(255),
+	city VARCHAR(30),
+	state VARCHAR(30),
+	pin VARCHAR(10),
+	phone VARCHAR(10) NOT NULL,
+	email VARCHAR(50) NOT NULL,
+	product_id INT(11),
+	bid_amount INT,
+	CONSTRAINT BYERINFO_PK PRIMARY KEY (buyer_id),
+	CONSTRAINT BUYERID_PRODUCT_FK FOREIGN KEY (product_id) REFERENCES PRODUCT(product_id)
+);
+
+CREATE TABLE user(
+	id INT(11) AUTO_INCREMENT,
+    user_name VARCHAR(50) NOT NULL,
+    password VARCHAR(100) NOT NULL,
+	first_name VARCHAR(30) NULL,
+	last_name VARCHAR(25) NULL,	
+	CONSTRAINT user_PK PRIMARY KEY (id) 
+);
+
+
+insert into sellerinfo values('101','XYZ Seller', 'XYZ Sellers', 'No-5 2nd Street', 'Chennai', 'Tamil Nadu', '600117', '9994877572', 'a@b.com');
