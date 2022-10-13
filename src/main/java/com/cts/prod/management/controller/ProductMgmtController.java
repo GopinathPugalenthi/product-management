@@ -47,32 +47,53 @@ public class ProductMgmtController {
 	
 	@PostMapping("/seller/add-product")
 	public ResponseEntity<String> addProduct(@RequestBody ProductDto productDto) throws Exception {
+		AuditDetail ad = new AuditDetail();
+		ad.setAction("Add Product");
+		ad.setAuctionEntity("Product");
+		ad.setAuditMessage("Product "+productDto.getProductName()+" has added successfully");
 	    service.addProduct(productDto);
+	    feignClientInterface.create(ad);
 		return new ResponseEntity<>("Product Added Successfully", HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/seller/delete/{productId}")
 	public ResponseEntity<String> deleteProductByProductId(@PathVariable String productId) {
+		AuditDetail ad = new AuditDetail();
+		ad.setAction("Delete Product");
+		ad.setAuctionEntity("Product");
+		ad.setAuditMessage("Product ID "+productId+" has deleted successfully");
 	    service.deleteByProductId(Integer.parseInt(productId));
+	    feignClientInterface.create(ad);
 	    return new ResponseEntity<>("Product deleted Successfully for Product Id::"+productId, HttpStatus.OK);
 	}
 	
 	@PostMapping("/buyer/place-bid")
 	public ResponseEntity<String> placeBid(@RequestBody ByerinfoDto byerinfoDto) throws Exception {
+		AuditDetail ad = new AuditDetail();
+		ad.setAction("Place Bid");
+		ad.setAuctionEntity("Byerinfo");
+		ad.setAuditMessage("For Product ID "+byerinfoDto.getProductId()+"bid has added successfully");
 		service.saveBidValues(byerinfoDto);
+		feignClientInterface.create(ad);
 		return new ResponseEntity<>("Bid Amount Placed Successfully", HttpStatus.OK);
 	}
 	
 	@PutMapping("/buyer/update-bid/{productId}/{buyerEmailld}/{newBidAmount}")
 	public ResponseEntity<String> updateProduct(@PathVariable int productId, @PathVariable String buyerEmailld, @PathVariable int newBidAmount) {
+		
+		AuditDetail ad = new AuditDetail();
+		ad.setAction("Update Product Bid");
+		ad.setAuctionEntity("Byerinfo");
+		ad.setAuditMessage("For Product ID "+productId+"bid has added successfully");
 		service.updateProduct(productId,buyerEmailld,newBidAmount);
+		feignClientInterface.create(ad);
 		return new ResponseEntity<>("Bid Amount updated Successfully", HttpStatus.OK);
 	}
 	
 	
-	@PostMapping("/auditDetails")
-    public  ResponseEntity<String> create(@RequestBody AuditDetail auditDetail) {
-        feignClientInterface.create(auditDetail);
-        return new ResponseEntity<>("Details got auditted Successfully", HttpStatus.OK);
-    }
+//	@PostMapping("/auditDetails")
+//    public  ResponseEntity<String> create(@RequestBody AuditDetail auditDetail) {
+//        feignClientInterface.create(auditDetail);
+//        return new ResponseEntity<>("Details got auditted Successfully", HttpStatus.OK);
+//    }
 }
